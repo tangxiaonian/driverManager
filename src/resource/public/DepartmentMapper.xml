@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.dao.DepartmentDao">
+
+    <insert id="addDepart" useGeneratedKeys="true" keyProperty="deptId" parameterType="Department">
+        insert into dept values (null,#{deptName})
+    </insert>
+
+    <resultMap id="DepartmentMap" type="Department">
+        <id column="dept_id" property="deptId"/>
+        <result column="dept_name" property="deptName"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="DepartmentMap">
+        select * from dept
+    </select>
+
+</mapper>

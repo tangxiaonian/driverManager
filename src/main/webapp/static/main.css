@@ -1,0 +1,28 @@
+#container{
+	background-color: #393d49;
+}
+
+#container .container{
+	height: 100%;
+}
+
+#container .container > nav{
+	margin: 0;
+}
+
+#box{
+	height: 600px;
+	padding-top: 50px;
+	background-color: #F2F2F2;
+}
+
+#box > .content{
+	width: 1000px;
+	height: 700px;
+	margin: 0 auto;
+	background-color: white;
+	/* border-radius: 20%; */
+}
+.header,.tab-content,.div-form{
+	padding: 5px;
+}

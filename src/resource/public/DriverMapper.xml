@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.dao.DriverDao">
+
+    <resultMap id="driverMap" type="Driver">
+
+        <id property="id" column="id"/>
+        <result property="driverName" column="driver_name"/>
+        <result property="driverNumber" column="driver_number"/>
+        <result property="driverDesc" column="driver_desc"/>
+        <result property="driverWay" column="driver_way"/>
+        <result property="dId" column="d_id"/>
+
+        <association property="department" javaType="Department">
+            <id column="dept_id" property="deptId"/>
+            <result column="dept_name" property="deptName"/>
+        </association>
+
+    </resultMap>
+
+    <select id="selectDriverById" parameterType="String" resultMap="driverMap">
+        select * from drivermanager.driver inner join
+        dept ON d_id = dept_id and id = #{id}
+    </select>
+
+    <select id="pageSelectDriver" resultMap="driverMap">
+        select * from drivermanager.driver inner join
+        dept ON d_id = dept_id order by id limit #{strat},#{pageSize}
+    </select>
+
+    <select id="driverCount" resultType="Long">
+        select count(*) from drivermanager.driver
+    </select>
+
+    <delete id="deleteById" parameterType="Integer">
+        delete from drivermanager.driver where id = #{id}
+    </delete>
+
+    <insert id="addDriver" parameterType="Driver" useGeneratedKeys="true" keyProperty="empId">
+        insert into drivermanager.driver values(null,
+        #{driverName},#{driverNumber},#{driverDesc},#{driverWay},#{dId})
+    </insert>
+
+    <update id="updtaeDriver" parameterType="Driver">
+        update drivermanager.driver set driver_name = #{driverName},
+            driver_number=#{driverNumber},driver_desc=#{driverDesc},
+            driver_way=#{driverWay},d_id=#{dId} where id = #{id}
+    </update>
+
+</mapper>
