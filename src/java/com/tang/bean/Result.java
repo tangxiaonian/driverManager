@@ -8,6 +8,8 @@ public class Result {
 
     private String msg;
     private Integer flage;
+    private String page;
+
 
     public Result(){
         this.msg = "success!";
@@ -17,6 +19,14 @@ public class Result {
     public Result(String msg, Integer flage) {
         this.msg = msg;
         this.flage = flage;
+    }
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
     }
 
     public String getMsg() {

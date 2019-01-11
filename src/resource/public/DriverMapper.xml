@@ -49,4 +49,20 @@
             driver_way=#{driverWay},d_id=#{dId} where id = #{id}
     </update>
 
+    <update id="updateReduceDriverNumber">
+        update drivermanager.driver
+        <set>
+            driver_number = driver_number - #{number}
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateAddDriverNumber">
+        update drivermanager.driver
+        <set>
+            driver_number = driver_number + #{number}
+        </set>
+        where id = #{id}
+    </update>
+
 </mapper>

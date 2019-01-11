@@ -16,6 +16,7 @@
         <mapper resource="/public/User.xml"/>
         <mapper resource="/public/DriverMapper.xml"/>
         <mapper resource="/public/DepartmentMapper.xml"/>
+        <mapper resource="/public/DebitMapper.xml"/>
     </mappers>
 
 </configuration>

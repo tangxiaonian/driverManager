@@ -24,4 +24,9 @@ public interface DriverDao {
 
     public int updtaeDriver(Driver driver);
 
+//    减少设备数量
+    public int updateReduceDriverNumber(@Param("number") Integer number,@Param("id") Integer id);
+
+    public int updateAddDriverNumber(@Param("number") Integer number,@Param("id") Integer id);
+
 }

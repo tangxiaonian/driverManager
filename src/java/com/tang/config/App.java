@@ -30,6 +30,7 @@ public class App implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("login");
-        registry.addViewController("/main").setViewName("/admin/admin_main");
+        registry.addViewController("/admin").setViewName("/admin/admin_main");
+        registry.addViewController("/user").setViewName("/user/user_main");
     }
 }

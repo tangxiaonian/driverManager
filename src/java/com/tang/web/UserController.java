@@ -31,6 +31,8 @@ public class UserController {
         String username = user.getUsername();
 
         Result result = userServiceImpl.login(user);
+//        默认普通用户界面跳转
+        result.setPage("/user");
 //        login success
         if (result.getFlage() == 1){
 
@@ -41,6 +43,10 @@ public class UserController {
             session.setAttribute("user",user);
 
             session.setMaxInactiveInterval(1200);
+//            管理员界面进入
+            if (user.getUsername().equals("admin")){
+                result.setPage("/admin");
+            }
 
         }
 

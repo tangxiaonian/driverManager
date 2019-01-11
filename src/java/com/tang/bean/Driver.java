@@ -27,6 +27,7 @@ public class Driver {
         this.department = department;
     }
 
+
     @Override
     public String toString() {
         return "Driver{" +
@@ -36,6 +37,7 @@ public class Driver {
                 ", driverDesc='" + driverDesc + '\'' +
                 ", driverWay='" + driverWay + '\'' +
                 ", dId=" + dId +
+                ", department=" + department +
                 '}';
     }
 

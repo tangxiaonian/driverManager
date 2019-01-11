@@ -3,6 +3,7 @@ package com.tang.service;
 import com.tang.bean.Driver;
 import com.tang.bean.PageDriver;
 import com.tang.dao.DriverDao;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,4 +83,11 @@ public class DriverService {
         return result;
     }
 
+    public int updateReduceDriverNumber(Integer number, Integer id){
+        return driverDaoImpl.updateReduceDriverNumber(number,id);
+    }
+
+    public int updateAddDriverNumber(Integer number, Integer id){
+        return driverDaoImpl.updateAddDriverNumber(number,id);
+    }
 }

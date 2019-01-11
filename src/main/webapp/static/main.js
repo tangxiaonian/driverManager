@@ -40,6 +40,42 @@ query_Btn.onclick = (event) => {
 
 };
 
+//  借用记录的id    审核结果的标志flage  1:不可借  2:可借   设备id   借用的数量
+function setCommintRecordId(id,resultFlage,d_idN,numberN){
+
+    recordId.value = id;
+
+    flage.value = resultFlage;
+
+    driverId_.value = d_idN;
+
+    number.value = numberN;
+}
+
+//管理员审核回复
+Reply_Btn.addEventListener("click",function (event) {
+
+    fetch("/admin/debit/",{
+        method:"post",
+        headers:{
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body:$(resultForm).serialize()
+    }).then((response)=>{
+
+        response.json().then((result)=>{
+            alert(result.msg);
+
+            resultForm.reset();
+
+            $('#checkDriver').modal('hide');
+
+            checkDriver(0);
+        });
+    });
+
+});
+
 //事件监听
 listGroup.addEventListener("click", (event) => {
 
@@ -63,9 +99,63 @@ listGroup.addEventListener("click", (event) => {
             case 1 :
                 page(formArray[1], secondTableHandler);
                 break;
+            case 2 :
+                checkDriver(0);
+                break;
         }
     }
 });
+
+//显示需要审核的设备列表
+function checkDriver(flage){
+
+    fetch("/admin/debits/"+flage,{
+        method:"get"
+    }).then((response)=>{
+       response.json().then((resultArray)=>{
+
+           console.log(resultArray);
+
+           ThirdTbody.innerHTML = "";
+
+           let template = "";
+           resultArray.forEach((item)=>{
+
+              let temp = `<tr>
+                            <th scope="row">${item.d_id}</th>
+                            <td>${item.user.username}</td>
+                            <td>${item.driver.driverName}</td>
+                            <td>${item.number}</td>
+                            <td>${item.user_message}</td>
+                            <td>
+                                <button
+                                        data-Id="${item.id}"
+                                        onclick="setCommintRecordId(${item.id},2,${item.d_id},${item.number})"
+                                        data-toggle="modal"
+                                        data-target="#checkDriver"
+                                        class="editBtn btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    可借
+                                </button>
+                                <button
+                                        data-Id="${item.id}"
+                                        onclick="setCommintRecordId(${item.id},1,${item.d_id},${item.number})"
+                                        data-toggle="modal"
+                                        data-target="#checkDriver"
+                                        class="editBtn btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    不可借
+                                </button>
+                            </td>
+                        </tr>`;
+               template += temp;
+           });
+
+           ThirdTbody.innerHTML = template;
+       });
+    });
+
+}
 
 //页面进入触发刷新
 page(formArray[0], firstTableHandler);
@@ -263,9 +353,7 @@ function pageNumber(pagination,pagePaginationID,pageForm,pageSize,pageCount,curr
     template += next;
 
     pagination.innerHTML = template;
-
 }
-
 
 function secondTableHandler(response) {
 

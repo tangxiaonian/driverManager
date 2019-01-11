@@ -44,7 +44,6 @@
     <script>
         window.onload = function (ev) {
 
-
             function serilizer(data){
 
                 return Object.keys(data).map((item)=>{
@@ -78,7 +77,7 @@
                         console.log(res.flage);
 
                         if (res.flage){
-                            window.location.href = "/main";
+                            window.location.href = res.page;
                         }
                     });
                 }

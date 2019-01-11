@@ -29,22 +29,9 @@
                     </tr>
                 </thead>
                 <tbody id="firstTbody">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>漏斗1</td>
-                        <td>2</td>
-                        <td>节水用的!</td>
-                        <td>不知道</td>
-                        <td>物理</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>漏斗1</td>
-                        <td>2</td>
-                        <td>节水用的!</td>
-                        <td>不知道</td>
-                        <td>物理</td>
-                    </tr>
+
+
+
                 </tbody>
             </table>
         </div>

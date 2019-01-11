@@ -1,0 +1,16 @@
+th,tr{
+    text-align: center;
+}
+.panel_hidden{
+    display: none;
+}
+.panel_display{
+    display: block;
+}
+
+.succ_status{
+    color: blue;
+}
+.fail_status{
+    color: red;
+}

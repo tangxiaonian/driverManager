@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tang.dao.DebitDao">
+
+    <insert id="insertDebitRecord" parameterType="Debit">
+        insert into DebitTable values (null,#{u_id},#{d_id},#{number},
+        0,#{user_message},#{admin_message})
+    </insert>
+
+    <resultMap id="DebitResultMap" type="Debit">
+        <id column="id" property="id"/>
+        <result column="u_id" property="u_id"/>
+        <result column="d_id" property="d_id"/>
+        <result column="number" property="number"/>
+        <result column="flageStatus" property="flageStatus"/>
+        <result column="admin_message" property="admin_message"/>
+        <result column="user_message" property="user_message"/>
+
+        <association property="user" javaType="User">
+            <id column="id1" property="id"/>
+            <result column="username" property="username"/>
+            <result column="phone" property="phone"/>
+        </association>
+
+        <association property="driver" javaType="Driver">
+            <id column="id2" property="id"/>
+            <result column="driver_name" property="driverName"/>
+            <result column="driver_number" property="driverNumber"/>
+            <result column="driver_desc" property="driverDesc"/>
+            <result column="driver_way" property="driverWay"/>
+        </association>
+
+    </resultMap>
+
+    <select id="getDebitAll" resultMap="DebitResultMap">
+        SELECT * from debittable a ,`user` b,driver c WHERE
+        a.d_id = c.id and b.id = a.u_id
+    </select>
+
+    <select id="selectByIdDebit" parameterType="Integer" resultMap="DebitResultMap">
+        SELECT * from debittable a ,`user` b,driver c WHERE
+        a.d_id = c.id and b.id = a.u_id and a.u_id = #{id}
+    </select>
+
+    <select id="selectByFlageStatusDebit" parameterType="Integer" resultMap="DebitResultMap">
+        SELECT * from debittable a ,`user` b,driver c WHERE
+        a.d_id = c.id and b.id = a.u_id and a.flageStatus = #{flage}
+    </select>
+
+
+    <update id="updateRecordStatus" parameterType="map">
+        update debittable
+        <set>
+            flageStatus = #{flage},
+            admin_message = #{message}
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <delete id="deleteByRecord" parameterType="Integer">
+        delete from debittable where id = #{id}
+    </delete>
+
+</mapper>
